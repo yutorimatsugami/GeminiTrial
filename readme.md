@@ -17,10 +17,10 @@
 # 自分のワークスペースに移動
 cd your_ws  
 # HTTPS経由でクローン
-git clone https://github.com/your-username/your-repository-name.git
+git clone https://github.com/yutorimatsugami/GeminiTrial.git
 
 # クローンしたディレクトリに移動
-cd your-repository-name
+cd GeminiTrial
 ```
 ## 1. 動作環境のセットアップ
 
