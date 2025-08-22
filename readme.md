@@ -2,14 +2,12 @@
 
 ## 概要
 
-このプロジェクトは、GoogleのGemini APIを利用して、特定のコマンドセットに基づいたテキスト生成を行うPythonスクリプトです。ユーザーが入力した自然言語の指示を解釈し、対応するコマンド形式に変換したり、指示内容をシーケンスに分解したりする機能を提供します。
+このプロジェクトは、GoogleのGemini APIを利用して、特定のコマンドセットに基づいたテキスト生成を行うPythonスクリプトです。ユーザーが入力した自然言語の指示を解釈し、Geminiモデルがテキストを生成したり、使用できるGeminiのモデルを一覧表示し、ログファイルに保存したりする機能を提供します。
 
 
 ## 主な機能
 
-* **テキスト生成**: ユーザーの入力に基づいて、Geminiモデルがテキストを生成します。
-* **コマンド変換**: 入力された文章を、あらかじめ定義されたコマンドセットの中から最も意味が近いものに一致させることができます。
-* **行動シーケンスの分割**: 入力された文章が示す行動を、一連のステップに分解します。
+* **テキスト生成**: ユーザーの入力に基づいて、Geminiモデルがテキストを生成します
 * **利用可能モデルのリストアップ**: 使用できるGeminiのモデルを一覧表示し、ログファイルに保存する機能も含まれています。
 
 ## 0. リポジトリのクローン
@@ -66,11 +64,12 @@ pip install -r requirements.txt
 ## 2. APIキーの設定
 
 次に、Google Gemini APIを利用するためのAPIキーを設定します。
+APIキーの取得はこのWebサイトを参考にしてください。分かりやすいです。
+https://pythonandai.com/gemini-api-key-python/
+出来れば、使用する前にサイトを隅々まで読んで理解することをおススメします。
 
 1.  プロジェクトのルートディレクトリに `.env` という名前のファイルを作成します。
 2.  `.env` ファイルに、お使いのGoogle APIキーを以下のように記述します。
-
-    ![.env file content](https://storage.googleapis.com/generativeai-assets/user_uploaded_files/image_c967ac.png)
 
     ```
     # API key for Google Gemini
@@ -89,11 +88,7 @@ pip install -r requirements.txt
 python gemini_main.py
 ```
 
-**実行例:**
 
-```
-入力してください:リビングルームに行って、テーブルの上にあるリンゴを取って、私にください。
-```
 
 スクリプト内の`prompt`変数を変更することで、Geminiに与える指示をカスタマイズできます。
 
@@ -105,6 +100,15 @@ prompt = f"以下のコマンドセットを参考にして、次の文章と一
 **行動シーケンスの分割（例）:**
 ```python
 prompt = f"次の文章の行動をシーケンス分けしてください。\n\n{input_text}"
+```
+
+**ロボット学会学術講演会の論文の実験で使ったchatGPTのプロンプトを使用する（例）**
+HSR_GPT_Prompt.txt というテキストファイルを開き、その内容をすべて読み込みます。
+読み込んだ内容は prompt 変数に格納されます。
+```python
+prompt_file_path = "HSR_GPT_Prompt.txt"
+with open(prompt_file_path, "r", encoding="utf-8") as file:
+    prompt = file.read()
 ```
 
 ### 利用可能モデルのリストアップ
